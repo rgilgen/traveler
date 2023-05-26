@@ -5,11 +5,12 @@ import org.junit.jupiter.api.Test;
 import java.util.Collections;
 import java.util.List;
 
+import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class TravelerJavaTest {
+class TravelerKotlinTest {
 
-    TravelerJava traveler = new TravelerJava();
+    Traveler traveler = new TravelerKotlin();
 
     @Test
     void test_VisitingOneCity_oneIsReturned() {
