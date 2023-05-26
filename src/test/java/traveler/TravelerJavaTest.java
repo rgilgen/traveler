@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class TravelerJavaTest {
 
@@ -28,11 +29,10 @@ class TravelerJavaTest {
         List<Integer> listOfCityDistances = List.of(50);
         int cityVisits = 1;
         int maxDistance = 30;
-        Journey expectedJourney = new Journey(Collections.emptyList());
 
         Journey actualJourney = traveler.choose_best_sum(maxDistance, cityVisits, listOfCityDistances);
 
-        assertEquals(expectedJourney, actualJourney);
+        assertNull(actualJourney);
     }
 
     @Test
