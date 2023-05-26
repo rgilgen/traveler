@@ -12,7 +12,11 @@ public class Journey {
     }
 
     public int getTotalDistance() {
-        return 1;
+        int sum = 0;
+        for (City city : cities) {
+            sum += city.getDistance();
+        }
+        return sum;
     }
 
     public List<City> getCities() {
