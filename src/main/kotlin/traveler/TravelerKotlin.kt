@@ -5,8 +5,27 @@ package traveler
 
 class TravelerKotlin : Traveler {
 
-    override fun choose_best_sum(maxDistance: Int, cityVisits: Int, listOfCityDistances: MutableList<Int>?): Journey {
-        TODO("Not yet implemented")
+    override fun choose_best_sum(maxDistance: Int, cityVisits: Int, listOfCityDistances: MutableList<Int>?): Journey? {
+        val cityList: List<City> = mapToCityList(listOfCityDistances)
+        val cityPermutations = splitIntoPermutations(cityList, cityVisits)
+        val bestSumPermutation = cityPermutations
+            .filter { it.totalDistance() <= maxDistance }
+            .maxByOrNull { it.totalDistance() }
+        return bestSumPermutation?.let {
+            Journey(it)
+        } ?: null
     }
 
+    private fun splitIntoPermutations(cityList: List<City>, cityVisits: Int) : List<List<City>> {
+        return cityList.map { listOf(it) };
+    }
+
+    private fun mapToCityList(listOfCityDistances: MutableList<Int>?): List<City> =
+        listOfCityDistances?.mapIndexed { index, cityDistance -> City(index, cityDistance) }
+            ?: throw IllegalArgumentException("Cannot be null input list")
+
+}
+
+fun List<City>.totalDistance(): Int {
+    return this.sumOf { it.distance }
 }

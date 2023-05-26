@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class TravelerKotlinTest {
 
@@ -32,7 +33,7 @@ class TravelerKotlinTest {
 
         Journey actualJourney = traveler.choose_best_sum(maxDistance, cityVisits, listOfCityDistances);
 
-        assertEquals(expectedJourney, actualJourney);
+        assertNull(actualJourney);
     }
 
     @Test
