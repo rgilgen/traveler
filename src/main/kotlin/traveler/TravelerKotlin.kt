@@ -7,22 +7,44 @@ class TravelerKotlin : Traveler {
 
     override fun choose_best_sum(maxDistance: Int, cityVisits: Int, listOfCityDistances: MutableList<Int>?): Journey? {
         val cityList: List<City> = mapToCityList(listOfCityDistances)
-        val cityPermutations = splitIntoPermutations(cityList, cityVisits)
+        val cityPermutations = getAllPermutations(cityList, cityVisits)
         val bestSumPermutation = cityPermutations
             .filter { it.totalDistance() <= maxDistance }
             .maxByOrNull { it.totalDistance() }
         return bestSumPermutation?.let {
             Journey(it)
-        } ?: null
-    }
-
-    private fun splitIntoPermutations(cityList: List<City>, cityVisits: Int) : List<List<City>> {
-        return cityList.map { listOf(it) };
+        }
     }
 
     private fun mapToCityList(listOfCityDistances: MutableList<Int>?): List<City> =
         listOfCityDistances?.mapIndexed { index, cityDistance -> City(index, cityDistance) }
             ?: throw IllegalArgumentException("Cannot be null input list")
+
+    private fun <City> getAllPermutations(list: List<City>, size: Int): List<List<City>> {
+        val permutations = mutableListOf<List<City>>()
+        generatePermutations(list, size, mutableListOf(), permutations)
+        return permutations
+    }
+
+    private fun <City> generatePermutations(
+        cityList: List<City>,
+        size: Int,
+        currentPermutation: MutableList<City>,
+        permutations: MutableList<List<City>>
+    ) {
+        if (currentPermutation.size == size) {
+            permutations.add(currentPermutation.toList())
+            return
+        }
+
+        for (city in cityList) {
+            if (city !in currentPermutation) {
+                currentPermutation.add(city)
+                generatePermutations(cityList, size, currentPermutation, permutations)
+                currentPermutation.removeAt(currentPermutation.size - 1)
+            }
+        }
+    }
 
 }
 
