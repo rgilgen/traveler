@@ -31,4 +31,11 @@ public class Journey {
     public int hashCode() {
         return Objects.hash(cities);
     }
+
+    @Override
+    public String toString() {
+        return "Journey{" +
+                "cities=" + cities +
+                '}';
+    }
 }

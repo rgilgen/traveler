@@ -36,4 +36,12 @@ public class City {
     public int hashCode() {
         return Objects.hash(index, distance);
     }
+
+    @Override
+    public String toString() {
+        return "City{" +
+                "index=" + index +
+                ", distance=" + distance +
+                '}';
+    }
 }
