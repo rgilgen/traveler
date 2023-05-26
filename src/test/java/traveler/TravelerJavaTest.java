@@ -1,9 +1,8 @@
 package traveler;
 
-import traveler.App;
 import org.junit.jupiter.api.Test;
 
-public class TestClass {
+public class TravelerJavaTest {
 
     @Test
     void test_it() {

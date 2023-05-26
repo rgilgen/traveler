@@ -1,6 +1,6 @@
 package traveler;
 
-public class AppJava {
+public class TravelerJava {
 
     public static void main(String[] args) {
 
