@@ -64,4 +64,16 @@ class TravelerKotlinTest {
 
         assertEquals(expectedJourney, actualJourney);
     }
+
+    @Test
+    void test_from_task() {
+        List<Integer> listOfCityDistances = List.of(91, 74, 73, 85, 73, 81, 87);
+        int cityVisits = 3;
+        int maxDistance = 230;
+        int expectedJourneyDistance = 228;
+
+        Journey actualJourney = traveler.choose_best_sum(maxDistance, cityVisits, listOfCityDistances);
+
+        assertEquals(expectedJourneyDistance, actualJourney.getTotalDistance());
+    }
 }
