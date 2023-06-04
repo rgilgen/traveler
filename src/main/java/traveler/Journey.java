@@ -39,6 +39,7 @@ public class Journey {
     @Override
     public String toString() {
         return "Journey{" +
+                "totalDistance=" + getTotalDistance() +
                 "cities=" + cities +
                 '}';
     }
