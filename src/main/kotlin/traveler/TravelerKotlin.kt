@@ -20,7 +20,7 @@ class TravelerKotlin : Traveler {
         listOfCityDistances?.mapIndexed { index, cityDistance -> City(index, cityDistance) }
             ?: throw IllegalArgumentException("Cannot be null input list")
 
-    private fun <City> getAllPermutations(list: List<City>, permutationSize: Int): List<List<City>> {
+    private fun getAllPermutations(list: List<City>, permutationSize: Int): List<List<City>> {
         val permutations = mutableListOf<List<City>>()
         generatePermutations(list, permutationSize, mutableListOf(), permutations)
         return permutations
@@ -37,25 +37,18 @@ class TravelerKotlin : Traveler {
             return
         }
 
-//        cityList.forEach {
-//            currentPermutation.add(it)
-//            generatePermutations(
-//                cityList.minus(it),
-//                size,
-//                currentPermutation,
-//                permutations
-//            )
-//            currentPermutation.removeAt(currentPermutation.size - 1)
-//        }
         for (city in cityList) {
             currentPermutation.add(city)
             generatePermutations(cityList.minus(city), size, currentPermutation, permutations)
             currentPermutation.removeAt(currentPermutation.size - 1)
         }
     }
-
 }
 
 fun List<City>.totalDistance(): Int {
     return this.sumOf { it.distance }
 }
+
+//fun MutableList<City>.totalDistance(): Int {
+//    return this.sumOf { it.distance }
+//}

@@ -13,6 +13,7 @@ class TavelerKTest {
     @OptIn(ExperimentalTime::class)
     @Test
     fun testIt() {
+        // without optimization took around 7.3 seconds
         val resourceAsText = getResourceAsText("/bigDataSet.txt")
         // val listOfCityDistances = generatBigDataSet(190, 1, 100)
         val listOfCityDistances = getListOfCitiesFromResources(resourceAsText)
