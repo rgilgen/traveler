@@ -3,12 +3,20 @@
  */
 package kata_css_1
 
+import java.io.File
 import kotlin.test.Test
 import kotlin.test.assertNotNull
 
 class AppTest {
-    @Test fun appHasAGreeting() {
-        val classUnderTest = App()
-        assertNotNull(classUnderTest.greeting, "app should have a greeting")
+
+    @Test
+    fun `GIVEN file WHEN reading THEN return string representation`() {
+        val lines = getResourceAsText("src/test/resources/ocr_input_story1.txt")
+
+        assertNotNull(lines)
     }
+
+    private fun getResourceAsText(path: String): List<String> =
+        File(path).readLines()
+
 }
