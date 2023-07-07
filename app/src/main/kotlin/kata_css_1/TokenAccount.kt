@@ -2,14 +2,14 @@ package kata_css_1
 
 data class TokenAccount(val lines: List<String>) {
 
-    val accountNumbers: List<Int>
+    private val accountNumbers: List<Int>
 
     init {
         accountNumbers = parseTokenNumbers().map { it.parseNumber() }
     }
-    
-    fun getAccountNumber() : Int {
-        val stringRepresentation = accountNumbers.map { it.toString() }.joinToString(separator = "")
+
+    fun getAccountNumber(): Int {
+        val stringRepresentation = accountNumbers.joinToString(separator = "") { it.toString() }
         return Integer.parseInt(stringRepresentation)
     }
 
@@ -17,7 +17,7 @@ data class TokenAccount(val lines: List<String>) {
         val firstLine = lines[0]
         val secondLine = lines[1]
         val thirdLine = lines[2]
-        val result = mutableListOf<TokenNumber>();
+        val result = mutableListOf<TokenNumber>()
         for (i in 0..24 step 3) {
             val element = TokenNumber(
                 listOf(
@@ -34,11 +34,10 @@ data class TokenAccount(val lines: List<String>) {
     }
 }
 
-class TokenNumber(val lines: List<String>) {
+class TokenNumber(private val lines: List<String>) {
 
     fun parseNumber(): Int {
-        val flatRepresentation = lines.joinToString(separator = ",")
-        return when (flatRepresentation) {
+        return when (lines.joinToString(separator = ",")) {
             "   ,  |,  |" -> 1
             " _ , _|,|_ " -> 2
             " _ , _|, _|" -> 3
@@ -48,9 +47,19 @@ class TokenNumber(val lines: List<String>) {
             " _ ,  |,  |" -> 7
             " _ ,|_|,|_|" -> 8
             " _ ,|_|, _|" -> 9
-            else -> throw IllegalArgumentException("Not a valid Integer representation: $flatRepresentation")
+            else -> throw IllegalArgumentException("Not a valid Integer representation: ${lines.joinToString(separator = ",")}")
         }
     }
+}
+
+fun validateAccountNumbers(accountNumbers: List<Int>): Boolean {
+    val reversedList = accountNumbers.reversed()
+    val summingUpNumbers = reversedList.dropLast(1)
+    val summingUpAccountNumbers = summingUpNumbers
+        .foldIndexed(1) { index, total, item -> total * (item + (index + 2)) }
+    println("summingUpAccountNumbers: $summingUpAccountNumbers")
+    val checksum = summingUpAccountNumbers + reversedList.last() * 9
+    return checksum % 11 == 0
 }
 
 

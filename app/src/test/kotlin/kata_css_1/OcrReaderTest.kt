@@ -7,6 +7,7 @@ import java.io.File
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
+import kotlin.test.assertTrue
 
 class OcrReaderTest {
 
@@ -65,6 +66,15 @@ class OcrReaderTest {
         val actualReadAccounts = ocrReader.readAccountsFromInput(lines)
 
         assertEquals(expectedAccounts, actualReadAccounts)
+    }
+
+    @Test
+    fun `GIVEN valid account WHEN validating THEN return true`() {
+        val accountNumbers = listOf(3, 4, 5, 8, 8, 2, 8, 6, 5)
+
+        val validAccount = validateAccountNumbers(accountNumbers)
+
+        assertTrue(validAccount)
     }
 
     private fun getResourceAsText(path: String): List<String> =
