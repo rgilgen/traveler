@@ -2,8 +2,9 @@ package kata_css_1
 
 data class TokenAccount(val lines: List<String>) {
     fun parseAccount(): Int {
-        parseTokenNumbers().map { it.parseNumber() }
-        return 0
+        val listOfIntegers = parseTokenNumbers().map { it.parseNumber() }
+        val stringRepresentation = listOfIntegers.map { it.toString() }.joinToString(separator = "")
+        return Integer.parseInt(stringRepresentation)
     }
 
     fun parseTokenNumbers(): List<TokenNumber> {
@@ -28,7 +29,22 @@ data class TokenAccount(val lines: List<String>) {
 }
 
 class TokenNumber(val lines: List<String>) {
-    fun parseNumber() {
-        TODO("Not yet implemented")
+
+    fun parseNumber() : Int {
+        val flatRepresentation = lines.joinToString(separator = ",")
+        return when(flatRepresentation) {
+            "   ,  |,  |" -> 1
+            " _ , _|,|_ " -> 2
+            " _ , _|, _|" -> 3
+            "   ,|_|,  |" -> 4
+            " _ ,|_ , _|" -> 5
+            " _ ,|_ ,|_|" -> 6
+            " _ ,  |,  |" -> 7
+            " _ ,|_|,|_|" -> 8
+            " _ ,|_|, _|" -> 9
+            else -> throw IllegalArgumentException("Not a valid Integer representation: $flatRepresentation")
+        }
     }
 }
+
+

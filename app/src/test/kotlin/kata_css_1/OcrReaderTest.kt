@@ -42,6 +42,21 @@ class OcrReaderTest {
         assertEquals(9, actualTokenNumbers.size)
     }
 
+    @Test
+    fun `GIVEN tokenAccount WHEN parsing the TokenNumbers THEN return the correct account number`() {
+        val tokenAccount = TokenAccount(
+            lines = listOf(
+                "    _  _     _  _  _  _  _ ",
+                "  | _| _||_||_ |_   ||_||_|",
+                "  ||_  _|  | _||_|  ||_| _|"
+            )
+        )
+        val expectedAccount = 123456789
+        val actualAccount = tokenAccount.parseAccount()
+
+        assertEquals(expectedAccount, actualAccount)
+    }
+
     private fun getResourceAsText(path: String): List<String> =
         File(path).readLines()
 
