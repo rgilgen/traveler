@@ -8,9 +8,9 @@ data class TokenAccount(val lines: List<String>) {
     }
 
     fun parseTokenNumbers(): List<TokenNumber> {
-        val firstLine = lines.get(0)
-        val secondLine = lines.get(1)
-        val thirdLine = lines.get(2)
+        val firstLine = lines[0]
+        val secondLine = lines[1]
+        val thirdLine = lines[2]
         val result = mutableListOf<TokenNumber>();
         for (i in 0..24 step 3) {
             val element = TokenNumber(

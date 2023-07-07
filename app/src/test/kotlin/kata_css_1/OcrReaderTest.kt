@@ -57,6 +57,16 @@ class OcrReaderTest {
         assertEquals(expectedAccount, actualAccount)
     }
 
+    @Test
+    fun `GIVEN file with two accounts WHEN parsing the account THEN return the two correct account numbers`() {
+        val lines = getResourceAsText("src/test/resources/ocr_input_story1_several_accounts.txt")
+        val expectedAccounts = listOf(123456789, 129457789)
+
+        val actualReadAccounts = ocrReader.readAccountsFromInput(lines)
+
+        assertEquals(expectedAccounts, actualReadAccounts)
+    }
+
     private fun getResourceAsText(path: String): List<String> =
         File(path).readLines()
 
