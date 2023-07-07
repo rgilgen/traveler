@@ -52,7 +52,7 @@ class OcrReaderTest {
             )
         )
         val expectedAccount = 123456789
-        val actualAccount = tokenAccount.parseAccount()
+        val actualAccount = tokenAccount.getAccountNumber()
 
         assertEquals(expectedAccount, actualAccount)
     }

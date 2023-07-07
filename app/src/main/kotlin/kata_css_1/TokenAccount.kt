@@ -1,9 +1,15 @@
 package kata_css_1
 
 data class TokenAccount(val lines: List<String>) {
-    fun parseAccount(): Int {
-        val listOfIntegers = parseTokenNumbers().map { it.parseNumber() }
-        val stringRepresentation = listOfIntegers.map { it.toString() }.joinToString(separator = "")
+
+    val accountNumbers: List<Int>
+
+    init {
+        accountNumbers = parseTokenNumbers().map { it.parseNumber() }
+    }
+    
+    fun getAccountNumber() : Int {
+        val stringRepresentation = accountNumbers.map { it.toString() }.joinToString(separator = "")
         return Integer.parseInt(stringRepresentation)
     }
 
@@ -30,9 +36,9 @@ data class TokenAccount(val lines: List<String>) {
 
 class TokenNumber(val lines: List<String>) {
 
-    fun parseNumber() : Int {
+    fun parseNumber(): Int {
         val flatRepresentation = lines.joinToString(separator = ",")
-        return when(flatRepresentation) {
+        return when (flatRepresentation) {
             "   ,  |,  |" -> 1
             " _ , _|,|_ " -> 2
             " _ , _|, _|" -> 3

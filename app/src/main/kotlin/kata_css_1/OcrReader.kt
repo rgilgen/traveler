@@ -17,7 +17,7 @@ class OcrReader {
     }
 
     fun readAccountsFromInput(lines: List<String>): List<Int> {
-        return tokenizeAccounts(lines).map { it.parseAccount() }
+        return tokenizeAccounts(lines).map { it.getAccountNumber() }
     }
 }
 
