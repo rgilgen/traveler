@@ -53,9 +53,8 @@ class TokenNumber(private val lines: List<String>) {
 }
 
 fun validateAccountNumbers(accountNumbers: List<Int>): Boolean {
-    val reversedList = accountNumbers.reversed()
-    val summingUpAccountNumbers = reversedList
-        .foldIndexed(0) { index, total, accountNumber -> total + (accountNumber * (index + 1)) }
+    val summingUpAccountNumbers = accountNumbers.reversed()
+        .reduceIndexed { index, total, accountNumber -> total + (accountNumber * (index + 1)) }
     println("summingUpAccountNumbers: $summingUpAccountNumbers")
     return summingUpAccountNumbers % 11 == 0
 }
